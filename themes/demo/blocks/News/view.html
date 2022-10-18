@@ -1,0 +1,54 @@
+<section>
+    <style>
+        .nyhed-heading p.dummy {
+            font-family: "Gotham Book" !important;
+        }
+        .nyhed-img.custm-size {
+            height: 550px;
+            width: 800px;
+            overflow: hidden;
+        }
+
+        .nyhed-img.custm-size img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .nyhed-img.custm-size {
+                height: auto;
+                width: 100%;
+            }
+
+            .nyhed-img.custm-size img {
+                height: auto;
+                width: 100%;
+            }
+        }
+    </style>
+    <div class="nyhed-section">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="nyhed-heading">
+                        <p>Nyhed</p>
+                        <h4>Oplev den nye<br>
+                            MX-9 på messen </h4>
+                        <p class="dummy">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+                        <div class="bestil">
+                            <button class="btn btn-submit">Bestil</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="nyhed-img custm-size">
+                        <a href="javascript:;"> <img src="assets/img/slider-3.jpg" class="w-100"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

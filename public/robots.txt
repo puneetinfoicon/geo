@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+
+User-agent: Mozilla/5.0 (Morningscore/1.0)
+Allow: /
+
+User-agent: Morningscore
+Allow: /

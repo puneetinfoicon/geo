@@ -1,0 +1,128 @@
+.custom-select-2 {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select-2 select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  right: 10px;
+  background: url(../img/select-arrow.png) var(--white);
+  background-repeat: no-repeat;
+  background-position: center right;
+  width: 20px;
+  height: 12px;
+  transition: .5s;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 1366px) {
+  .select-selected:after {
+    background-size: 15px;
+  }
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  top: 7px;
+  transform: rotate(180deg);
+  transition: .5s;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+  color: var(--main);
+  cursor: pointer;
+  user-select: none;
+  font-family: "Gotham Medium";
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 5px;
+  padding-right: 40px;
+  position: relative;
+}
+
+@media (max-width: 1366px) {
+  .select-items div,.select-selected {
+    font-size: 13px;
+  }
+}
+
+.select-items div {
+    font-family: 'Gotham Book';
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: var(--white);
+  top: 100%;
+  left: auto;
+  right: 0;
+  z-index: 99;
+  width: 100%;
+  min-width: 185px;
+  padding: 12px;
+  box-shadow: 0 0 10px 0 rgb(19 46 85 / 30%);
+}
+
+.select-items .div {}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  font-family: 'Gotham'!important;
+}
+
+.pos-rel.custom-select-2 .select-selected {
+    border: 1px solid var(--main);
+    padding: 13px 10px;
+    font-size: 15px;
+    color: var(--main);
+    font-family: "Gotham Book";
+    border-radius: 0;
+    outline: none;
+    height: 49px;
+    box-shadow: none;
+}
+@media (max-width: 1366px) {
+  .pos-rel.custom-select-2 .select-selected {
+    font-size: 11px;
+    height: 35px;
+    padding: 9px 10px;
+  }
+}
+.pos-rel.custom-select-2 .select-items {
+  box-shadow: none;
+  border: 1px solid var(--main);
+}
+
+.pos-rel.custom-select-2 .select-items div:hover, .pos-rel.custom-select-2 .same-as-selected {
+  font-family: "Gotham Book"!important;
+}
+
+.pos-rel.custom-select-2 .select-items div {
+  font-size: 15px;
+  padding-right: 0;
+}
+@media (max-width: 1366px) {
+  .pos-rel.custom-select-2 .select-items div {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+}
+.pos-rel.custom-select-2 .select-items div:last-child {
+  margin-bottom: 0;
+}
