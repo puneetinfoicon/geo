@@ -23,9 +23,7 @@
     <link href=" {{ asset('admin-assets/css/semi-dark.css') }}" rel="stylesheet"/>
     <link href=" {{ asset('admin-assets/css/header-colors.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <title>Geo Admin</title>
+    <title>Geo Admin Panel</title>
 </head>
 
 <body>
@@ -47,27 +45,9 @@
                 <i class="bi bi-list"></i>
             </div>
             <div class="top-navbar d-none d-xl-block">
-                <!-- <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                    <a class="nav-link" href="index">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="app-emailbox">Email</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="javascript:;">Projects</a>
-                    </li>
-                    <li class="nav-item d-none d-xxl-block">
-                    <a class="nav-link" href="javascript:;">Events</a>
-                    </li>
-                    <li class="nav-item d-none d-xxl-block">
-                    <a class="nav-link" href="app-to-do">Todo</a>
-                    </li>
-                  </ul> -->
+
             </div>
-            <!-- <div class="search-toggle-icon d-xl-none ms-auto">
-                  <i class="bi bi-search"></i>
-                </div> -->
+
             <form class="searchbar d-none d-xl-flex ms-auto">
                 <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><i class="bi bi-search"></i>
                 </div>
@@ -145,7 +125,8 @@
                     @if(\Auth::user()->id ==1)
                         <ul class="navbar-nav align-items-center">
                             <li class="nav-item dropdown dropdown-large">
-                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
+                                   data-bs-toggle="dropdown">
                                     <div class="user-setting d-flex align-items-center gap-1">
                                         <img src="{{asset( imageCheck(Auth::user()->image))}}" class="user-img" alt="">
                                         <div class="user-name d-none d-sm-block">{{Auth::user()->name}}</div>
@@ -155,10 +136,12 @@
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             <div class="d-flex align-items-center">
-                                                <img src="{{asset( imageCheck(Auth::user()->image))}}" alt="" class="rounded-circle" width="60" height="60">
+                                                <img src="{{asset( imageCheck(Auth::user()->image))}}" alt=""
+                                                     class="rounded-circle" width="60" height="60">
                                                 <div class="ms-3">
                                                     <h6 class="mb-0 dropdown-user-name">{{Auth::user()->name}}</h6>
-                                                    <small class="mb-0 dropdown-user-designation text-secondary">{{Auth::user()->roles[0]->name}}</small>
+                                                    <small
+                                                        class="mb-0 dropdown-user-designation text-secondary">{{Auth::user()->roles[0]->name}}</small>
                                                 </div>
                                             </div>
                                         </a>
@@ -194,7 +177,6 @@
                                     </li>
                                 </ul>
                             </li>
-
                         </ul>
                     @endif
                 @endif
@@ -281,19 +263,6 @@
                     <div class="menu-title">Team</div>
                 </a>
             </li>
-
-            {{-- <li class="">
-               <a href="javascript:;" class="has-arrow" aria-expanded="false">
-                 <div class="parent-icon"><i class="bi bi-arrow-right-short"></i>
-                 </div>
-                 <div class="menu-title">Users</div>
-               </a>
-
-               <ul class="mm-collapse" style="height: 2px;">
-                 <li> <a href="{{route('addTeam')}}" aria-expanded="true"><i class="bi bi-arrow-right-short"></i>Team</a>
-               </ul>
-
-             </li>--}}
 
             <li class="">
                 <a href="javascript:;" class="has-arrow" aria-expanded="false">

@@ -1,7 +1,7 @@
 <?php
-$pathInfo =\Request::getPathInfo();
-if (!empty(getCookie('produktkategori')) && (getCookie('produktkategori')==1 || getCookie('produktkategori')==2) && ($pathInfo =='/' || $pathInfo == '/home' )){
-    header("Location: produktkategori/".getCookie('produktkategori'));
+$pathInfo = \Request::getPathInfo();
+if (!empty(getCookie('produktkategori')) && (getCookie('produktkategori') == 1 || getCookie('produktkategori') == 2) && ($pathInfo == '/' || $pathInfo == '/home')) {
+    header("Location: produktkategori/" . getCookie('produktkategori'));
 }
 $meta = getMetaDetails($page->get('id'));
 ?>
@@ -54,53 +54,50 @@ $meta = getMetaDetails($page->get('id'));
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
         var str = window.location.href;
         var test = str.split("/service-support/");
         // if (test[1] != undefined){
         $.ajax({
             type: "GET",
             // url: "http://geoteamdemo.info/trimble?page="+test[1],
-           // url: "http://geoteamdemo.info/trimble?page="+test[1],
-             url: "<?= url('/trimble?page=')?>",
+            // url: "http://geoteamdemo.info/trimble?page="+test[1],
+            url: "<?= url('/trimble?page=')?>",
 
             success: function (data) {
                 $('#trimble_menu').html(data);
             }
         })
         // }
-        setTimeout(function() {
-           $('.ig1').attr('src',"<?= asset('assets/img/icon/Arrow-left.svg')?>")
-            }, 100);
+        setTimeout(function () {
+            $('.ig1').attr('src', "<?= asset('assets/img/icon/Arrow-left.svg')?>")
+        }, 100);
 
-        $('.mail-btn').click(function (){
-            if($("#html").prop('checked') == false && $("#css").prop('checked') == false){
+        $('.mail-btn').click(function () {
+            if ($("#html").prop('checked') == false && $("#css").prop('checked') == false) {
                 toastMixin.fire({
                     title: 'Please select at list one area',
                     icon: 'error'
                 });
-            }
-            else if($("#javascript").prop('checked') == false && $("#css").prop('checked') == false){
+            } else if ($("#javascript").prop('checked') == false && $("#css").prop('checked') == false) {
                 toastMixin.fire({
                     title: 'Please select privacy policy.',
                     icon: 'error'
                 });
-            }
-            else if($("#newsEmail").val() === ''){
+            } else if ($("#newsEmail").val() === '') {
                 toastMixin.fire({
                     title: 'Please enter your email-id',
                     icon: 'error'
                 });
-            }
-            else{
-                if($("#html").prop('checked') == true){
+            } else {
+                if ($("#html").prop('checked') == true) {
                     var landmailing = $('#html').val();
-                }else{
+                } else {
                     var landmailing = "";
                 }
-                if($("#css").prop('checked') == true){
+                if ($("#css").prop('checked') == true) {
                     var landburg = $('#css').val();
-                }else{
+                } else {
                     var landburg = "";
                 }
                 $.ajax({
@@ -109,23 +106,22 @@ $meta = getMetaDetails($page->get('id'));
                     data: "landmailing=" + landmailing + '&_token=<?= csrf_token()?>' + '&landburg=' + landburg + '&email=' + $("#newsEmail").val(),
                     success: function (data) {
                         console.log(data)
-                        if (data.status == 1){
+                        if (data.status == 1) {
                             toastMixin.fire({
                                 title: data.message,
                                 icon: 'error'
                             });
-                        }
-                        else if (data.status == 0){
+                        } else if (data.status == 0) {
                             toastMixin.fire({
                                 title: data.message,
                                 icon: 'error'
                             });
-                        }else{
+                        } else {
                             toastMixin.fire({
                                 title: 'You have successfully subscribed to our newsletter.',
                                 icon: 'success'
                             });
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 window.location.reload();
                             }, 3000);
                         }
@@ -147,8 +143,8 @@ $meta = getMetaDetails($page->get('id'));
         }
     }
 
-    $(document).ready(function(){
-        $('.searchright').on('keyup',function (){
+    $(document).ready(function () {
+        $('.searchright').on('keyup', function () {
             var keyword = $(this).val();
             var imgUrl = "<?= url('/')?>";
 
@@ -172,21 +168,20 @@ $meta = getMetaDetails($page->get('id'));
                             y++;
                             if (y <= 3) {
 
-                                if (item.hide_amount == 0 && item.priceApi){
+                                if (item.hide_amount == 0 && item.priceApi) {
                                     // if (item.hide_amount == 0 && item.priceApi.basePrice != undefined){
                                     var color = item.priceApi.availability.color;
                                     var apiText = item.priceApi.availability.text;
                                     let number = item.priceApi.basePrice;
                                     number = number.toLocaleString();
                                     var apiPrice = parseFloat(number.replace(/,/gi, ".")) + '  kr. ekskl. moms';
-                                    var optCss = "style='background-color:"+color+"'";
-                                }else{
+                                    var optCss = "style='background-color:" + color + "'";
+                                } else {
                                     var color = '';
                                     var apiText = '';
                                     var apiPrice = 'Ring for en pris';
                                     var optCss = "style='background-color:white'";
                                 }
-
 
 
                                 productImg = "assets/img/no-product.png";
@@ -197,35 +192,35 @@ $meta = getMetaDetails($page->get('id'));
                                 var productName = item.api_name;
                                 var pproductName = productName.replace(/\//gi, "-");
 
-                                var route = "<?= url('/produkt/null/')?>/" + item.id + "/" + pproductName.replace(/ /g, "-") ;
-                                if (item.is_subscription =='1'){
+                                var route = "<?= url('/produkt/null/')?>/" + item.id + "/" + pproductName.replace(/ /g, "-");
+                                if (item.is_subscription == '1') {
                                     var delCart = ' d-none';
-                                }else{
+                                } else {
                                     var delCart = '';
                                 }
 
-                                resultData += '<div class="media-custom"> <div class="media-left"> <a href="' + route + '"><img src="' + imgUrl + '/' + productImg + '" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + route + '"> <h3>' + item.api_name + '</h3> </a> <p>' + item.api_id + '</p><p>' + item.short_text + '</p><ul> <li><strong>'+apiPrice+'</strong></li><li><span '+optCss+'></span> '+apiText+'</li></ul> </div><div class="media-right"> <a href="#" id="'+item.api_id+'" onclick="searchaddCart('+item.id+')" class="add-basket '+item.id+ delCart+'">Læg i kurv</a> </div></div>';
+                                resultData += '<div class="media-custom"> <div class="media-left"> <a href="' + route + '"><img src="' + imgUrl + '/' + productImg + '" alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + route + '"> <h3>' + item.api_name + '</h3> </a> <p>' + item.api_id + '</p><p>' + item.short_text + '</p><ul> <li><strong>' + apiPrice + '</strong></li><li><span ' + optCss + '></span> ' + apiText + '</li></ul> </div><div class="media-right"> <a href="#" id="' + item.api_id + '" onclick="searchaddCart(' + item.id + ')" class="add-basket ' + item.id + delCart + '">Læg i kurv</a> </div></div>';
                             }
                         });
                         data.content.contents.data.forEach(function (item) {
                             x++;
                             var pName = item.name;
                             var ppName = pName.replace(/\//gi, "-");
-                            var routes = "<?= url('/produkt/null/')?>/" + item.id+ "/" + ppName.replace(/ /g, "-") ;
+                            var routes = "<?= url('/produkt/null/')?>/" + item.id + "/" + ppName.replace(/ /g, "-");
                             console.log(routes);
                             if (x <= 3) {
                                 // console.log(item)
                                 if (item.type == "guide" || item.type == "video" || item.type == "file") {
                                     //console.log(item.contextType)
                                     var fileUrl = "#";
-                                    if (item.file_url != null){
-                                        var fileUrl = "<?= asset('').'/'?>"+item.file_url;
+                                    if (item.file_url != null) {
+                                        var fileUrl = "<?= asset('') . '/'?>" + item.file_url;
                                     }
 
 
-                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="'+baseUrl+'/assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div><div class="media-right"> <a href="'+fileUrl+'" class="add-basket" target="_blank">Hent</a> </div></div>';
+                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="' + baseUrl + '/assets/img/s4.png" alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div><div class="media-right"> <a href="' + fileUrl + '" class="add-basket" target="_blank">Hent</a> </div></div>';
                                 } else {
-                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="'+baseUrl+'/assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div></div>';
+                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="' + baseUrl + '/assets/img/s4.png" alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div></div>';
                                 }
                             }
                         });
@@ -233,10 +228,10 @@ $meta = getMetaDetails($page->get('id'));
                         data.page.contents.data.forEach(function (item) {
                             z++;
                             if (x <= 3) {
-                                resultPage += ' <div class="media-custom"> <div class="media-left"> <a href="'+item.link+'" target="_blank"><img src="'+baseUrl+'/assets/img/s4.png"  alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="'+item.link+'" target="_blank"> <h3>' + item.name + '</h3> </a> <p>'+item.description+'</p></div><div class="media-right"> </div></div>';
+                                resultPage += ' <div class="media-custom"> <div class="media-left"> <a href="' + item.link + '" target="_blank"><img src="' + baseUrl + '/assets/img/s4.png"  alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + item.link + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div><div class="media-right"> </div></div>';
                             }
                         });
-                        // console.log(data.page.totalCount)
+
                         $('#searchPage').html(resultPage);
                         $('#searchDoc').html(resultDoc);
                         $('#checkCounting').html(checkCounting(data.totalProducts))
@@ -262,56 +257,56 @@ $meta = getMetaDetails($page->get('id'));
 <script>
     $(document).ready(function () {
         $('.bestil button').html();
-    $('#searchButton').click(function () {
-        var searchData = $('#search').val();
-        if (searchData.length > 0) {
-            window.location.href = "<?= url('/search-produkt?name=')?>" + searchData;
-        }
-    });
+        $('#searchButton').click(function () {
+            var searchData = $('#search').val();
+            if (searchData.length > 0) {
+                window.location.href = "<?= url('/search-produkt?name=')?>" + searchData;
+            }
+        });
 
-    $('.seeAll').click(function () {
-        console.log($('#searchright').val())
-        //window.location.href = "<?= url('/search-produkt?name=')?>" + $('#searchright').val();
-    })
+        $('.seeAll').click(function () {
+            console.log($('#searchright').val())
+            //window.location.href = "<?= url('/search-produkt?name=')?>" + $('#searchright').val();
+        })
     })
 </script>
 
 <script>
     function searchaddCart(data) {
-        var api_id = $('.'+data).attr('id');
+        var api_id = $('.' + data).attr('id');
         var simNumber = null
 
         $.ajax({
             type: "POST",
             url: "<?= route('cart_add_subscription')?>",
             // data: "api_id=" + api_id + '&_token=<?= csrf_token()?>'+'&qty='+$('#antal').val()+'&unitPrice='+$('.unitPrice').html()+'&sellPrice='+$('.sellPrice').html(), // For Static Code
-            data: 'phy_productId='+data+'&_token=<?= csrf_token()?>'+'&qty=1&simNumber='+simNumber,
+            data: 'phy_productId=' + data + '&_token=<?= csrf_token()?>' + '&qty=1&simNumber=' + simNumber,
             beforeSend: function () {
                 $("#pre-loader").removeClass('d-none');
             },
             success: function (data) {
-                if (data == 200){
+                if (data == 200) {
                     toastMixin.fire({
                         title: 'Product has been successfully added to your basket',
                         icon: 'success'
                     });
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.location.reload();
                     }, 4000);
                 }
 
-                if (data.status == 3){
+                if (data.status == 3) {
                     toastMixin.fire({
                         title: data.message,
                         icon: 'error'
                     });
-                    setTimeout(function() {
-                        window.location.href = "<?= url('').'/login-register'?>";
+                    setTimeout(function () {
+                        window.location.href = "<?= url('') . '/login-register'?>";
                     }, 4000);
-                }else{
+                } else {
                     window.location.reload();
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.reload();
                 }, 3000);
             }
@@ -339,18 +334,16 @@ $meta = getMetaDetails($page->get('id'));
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
         },
-        submitHandler:function(){
+        submitHandler: function () {
             $.ajax({
-                type        : 'POST',
-                url         : "<?= url('landmailing-mailchimp')?>",
+                type: 'POST',
+                url: "<?= url('landmailing-mailchimp')?>",
                 data: "email=" + $('#landmailingForm input').val() + '&_token=<?= csrf_token()?>',
-                success: function(data)
-                {
-                    if(data.status == 200 ){
+                success: function (data) {
+                    if (data.status == 200) {
                         $('.mod-status').html(data.message);
                         $('#successModal').modal('show');
-                    }
-                    else{
+                    } else {
                         $('.mod-status').html(data.message);
                         $('#failedModal').modal('show');
                     }
@@ -378,18 +371,16 @@ $meta = getMetaDetails($page->get('id'));
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass('is-invalid');
         },
-        submitHandler:function(){
+        submitHandler: function () {
             $.ajax({
-                type        : 'POST',
-                url         : "<?= url('landburg-mailchimp')?>",
+                type: 'POST',
+                url: "<?= url('landburg-mailchimp')?>",
                 data: "email=" + $('#landburgForm input').val() + '&_token=<?= csrf_token()?>',
-                success: function(data)
-                {
-                    if(data.status == 200 ){
+                success: function (data) {
+                    if (data.status == 200) {
                         $('.mod-status').html(data.message);
                         $('#successModal').modal('show');
-                    }
-                    else{
+                    } else {
                         $('.mod-status').html(data.message);
                         $('#failedModal').modal('show');
                     }
@@ -417,7 +408,7 @@ $meta = getMetaDetails($page->get('id'));
         }
     });
 
-    document.querySelector(".first").addEventListener('click', function(){
+    document.querySelector(".first").addEventListener('click', function () {
         Swal.fire({
             toast: true,
             icon: 'success',
@@ -434,14 +425,14 @@ $meta = getMetaDetails($page->get('id'));
         })
     });
 
-    document.querySelector(".second").addEventListener('click', function(){
+    document.querySelector(".second").addEventListener('click', function () {
         toastMixin.fire({
             animation: true,
             title: 'Signed in Successfully'
         });
     });
 
-    document.querySelector(".third").addEventListener('click', function(){
+    document.querySelector(".third").addEventListener('click', function () {
         toastMixin.fire({
             title: 'Wrong Password',
             icon: 'error'
@@ -461,27 +452,25 @@ $meta = getMetaDetails($page->get('id'));
                 number: true,
             },
         },
-        submitHandler:function(){
+        submitHandler: function () {
             $.ajax({
-                type        : 'POST',
-                url         : "<?= route('sendEmail_kontakt')?>",
-                data        :new FormData( $("#blivForm")[0] ),
-                async : false,
-                cache : false,
-                contentType : false,
-                processData : false,
-                success: function(data)
-                {
-                    if(data.status == 1 ){
+                type: 'POST',
+                url: "<?= route('sendEmail_kontakt')?>",
+                data: new FormData($("#blivForm")[0]),
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status == 1) {
                         toastMixin.fire({
                             title: data.message,
                             icon: 'success'
                         });
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload();
                         }, 4000);
-                    }
-                    else{
+                    } else {
                         toastMixin.fire({
                             title: data.message,
                             icon: 'error'
@@ -506,27 +495,25 @@ $meta = getMetaDetails($page->get('id'));
                 number: true,
             },
         },
-        submitHandler:function(){
+        submitHandler: function () {
             $.ajax({
-                type        : 'POST',
-                url         : "<?= route('sendEmail_kontakt')?>",
-                data        :new FormData( $("#konkatForm")[0] ),
-                async : false,
-                cache : false,
-                contentType : false,
-                processData : false,
-                success: function(data)
-                {
-                    if(data.status == 1 ){
+                type: 'POST',
+                url: "<?= route('sendEmail_kontakt')?>",
+                data: new FormData($("#konkatForm")[0]),
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status == 1) {
                         toastMixin.fire({
                             title: data.message,
                             icon: 'success'
                         });
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload();
                         }, 4000);
-                    }
-                    else{
+                    } else {
                         toastMixin.fire({
                             title: data.message,
                             icon: 'error'
