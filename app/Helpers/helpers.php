@@ -3837,9 +3837,7 @@ if (!function_exists('sendMail')) {
     {
         return Menu::where('status',1)->get();
     }
+	
+	
 
-//    function getSubMenu($menuId)
-//    {
-//        return Submenu::where('menu_id',$menuId)->get();
-//    }
 }
