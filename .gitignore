@@ -1,3 +1,7 @@
 /public/media
+/public/assets/img/*
 /public/storage
 /storage/app/pagebuilder/uploads
+.env
+composer.json
+composer.lock
