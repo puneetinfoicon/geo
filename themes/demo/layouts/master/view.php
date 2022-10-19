@@ -69,7 +69,9 @@ $meta = getMetaDetails($page->get('id'));
             }
         })
         // }
-
+        setTimeout(function() {
+           $('.ig1').attr('src',"<?= asset('assets/img/icon/Arrow-left.svg')?>")
+            }, 100);
 
         $('.mail-btn').click(function (){
             if($("#html").prop('checked') == false && $("#css").prop('checked') == false){
@@ -221,9 +223,9 @@ $meta = getMetaDetails($page->get('id'));
                                     }
 
 
-                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div><div class="media-right"> <a href="'+fileUrl+'" class="add-basket" target="_blank">Hent</a> </div></div>';
+                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="'+baseUrl+'/assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div><div class="media-right"> <a href="'+fileUrl+'" class="add-basket" target="_blank">Hent</a> </div></div>';
                                 } else {
-                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div></div>';
+                                    resultDoc += ' <div class="media-custom"> <div class="media-left"> <a href="' + fileUrl + '" target="_blank"><img src="'+baseUrl+'/assets/img/s4.png" alt="'+item.alt_image+'" class="img-fluid"></a> </div><div class="media-body"> <a href="' + fileUrl + '" target="_blank"> <h3>' + item.name + '</h3> </a> <p>' + item.description + '</p></div></div>';
                                 }
                             }
                         });

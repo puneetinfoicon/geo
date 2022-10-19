@@ -1,9 +1,3 @@
-<?php
-include 'db_config111.php';
-$areaQuery = mysqli_query($con, "select name, id from areas order by rank ASC");
-while ($areas = mysqli_fetch_object($areaQuery)) {
-}
-?>
 
 <style>
     .accordion-bral {
@@ -29,14 +23,13 @@ while ($areas = mysqli_fetch_object($areaQuery)) {
                             <h3>Filter</h3>
                             <div class="custom-checkbox">
                                 <div class="select_everyone">
-                                    <?php
-                                    $areaQuery = mysqli_query($con, "select name, id from areas order by rank ASC");
-                                    while ($areas = mysqli_fetch_object($areaQuery)) {
+                                    <?php 
+                                    foreach (getFaq() as $areas) {
                                         ?>
                                         <div class="form-group">
                                             <input type="checkbox" id="ch<?= $areas->id ?>" value="<?= $areas->id ?>"
                                                    class="checkC selectedId4<?= $areas->id ?>" onchange="faqData()">
-                                            <label for="ch<?= $areas->id ?>"><?= utf8_encode($areas->name) ?></label>
+                                            <label for="ch<?= $areas->id ?>"><?= $areas->name ?></label>
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -49,17 +42,16 @@ while ($areas = mysqli_fetch_object($areaQuery)) {
                             <div class="description-section">
                                 <div class="accordion-bral">
                                     <div id="test">
-                                        <?php
-                                        $qyeryFaq = mysqli_query($con, "select * from faqs ");
-                                        while ($rowFaq = mysqli_fetch_object($qyeryFaq)) {
+                                        <?php 
+                                        foreach (getArea() as $rowFaq) {
                                             ?>
                                             <div class="accordian-box">
                                                 <input class="ac-input" id="ac-<?= $rowFaq->id?>" name="accordion-1" type="checkbox" />
                                                 <label class="ac-label toggle-btn" for="ac-<?= $rowFaq->id?>">
-                                                    <span class="arrow"></span><?= utf8_encode($rowFaq->question)?></label>
+                                                    <span class="arrow"></span><?= $rowFaq->question?></label>
                                                 <div class="article ac-content">
                                                     <div class="content-aa">
-                                                        <p><?= utf8_encode($rowFaq->answer)?></p>
+                                                        <p><?= $rowFaq->answer?></p>
                                                     </div>
                                                 </div>
                                             </div>

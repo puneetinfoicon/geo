@@ -2,6 +2,9 @@
 /public/assets/img/*
 /public/storage
 /storage/app/pagebuilder/uploads
+public/pagebuilder/uploads/
+.idea/
 .env
 composer.json
 composer.lock
+.env.backup

@@ -22,6 +22,7 @@
     <link href=" {{ asset('admin-assets/css/light-theme.css') }}" rel="stylesheet"/>
     <link href=" {{ asset('admin-assets/css/semi-dark.css') }}" rel="stylesheet"/>
     <link href=" {{ asset('admin-assets/css/header-colors.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <title>Geo Admin</title>
