@@ -384,6 +384,11 @@ class ProfileController extends Controller
         }
     }
 
+    public function forgotPass(Request $request)
+    {
+        echo 1;
+    }
+
 
 }
 

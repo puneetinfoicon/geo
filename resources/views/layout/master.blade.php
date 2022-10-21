@@ -317,7 +317,7 @@ if(isset($area->name)){
                 if (isset($cartPrice[$cartData->productNumber]) && $pImage->hide_amount !='1'){
                 $ss[] = $cartData->sellPrice;
                 ?>
-                <h5>Pris: <?= str_replace(",",".",number_format($cartData->sellPrice));?> kr. ekskl. moms</h5>
+                <h5>Pris: <?= $cartData->sellPrice;?> kr. ekskl. moms</h5>
                 <h5><span class="green" style="background-color: <?= $cartPrice[$cartData->productNumber]->availability->color?>"></span><?= $cartPrice[$cartData->productNumber]->availability->text?> </h5>
                 <?php }else{ ?>
                 <h5><span class="green" style="background-color: #FFFFFF"></span>Ring for en pris </h5>
@@ -331,7 +331,7 @@ if(isset($area->name)){
     <div class="totle-price">
         <ul>
             <?php if(isset($ss)) { echo " <li>I alt</li>"; }?>
-            <li><?php if(isset($ss)) { echo str_replace(",",".",number_format(array_sum($ss))) ." kr. ekskl. moms"; } else{ "00.00  kr. ekskl. moms"; } ?></li>
+            <li><?php if(isset($ss)) { echo array_sum($ss) ." kr. ekskl. moms"; } else{ "00.00  kr. ekskl. moms"; } ?></li>
         </ul>
     </div>
 

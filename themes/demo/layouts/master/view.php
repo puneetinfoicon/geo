@@ -146,7 +146,7 @@ $meta = getMetaDetails($page->get('id'));
     $(document).ready(function () {
         $('.searchright').on('keyup', function () {
             var keyword = $(this).val();
-            var imgUrl = "<?= url('/')?>";
+            var imgUrl = "<?= asset('')?>";
 
             if (keyword.length > 2) {
                 $('.search-overlay').removeClass('d-none');
@@ -185,10 +185,11 @@ $meta = getMetaDetails($page->get('id'));
 
 
                                 productImg = "assets/img/no-product.png";
-                                if (item.url != '') {
+                                if (item.url != '' || item.url !='null') {
                                     // console.log(data.products.data[y])
                                     productImg = item.url;
                                 }
+                                console.log(productImg)
                                 var productName = item.api_name;
                                 var pproductName = productName.replace(/\//gi, "-");
 
@@ -199,7 +200,7 @@ $meta = getMetaDetails($page->get('id'));
                                     var delCart = '';
                                 }
 
-                                resultData += '<div class="media-custom"> <div class="media-left"> <a href="' + route + '"><img src="' + imgUrl + '/' + productImg + '" alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + route + '"> <h3>' + item.api_name + '</h3> </a> <p>' + item.api_id + '</p><p>' + item.short_text + '</p><ul> <li><strong>' + apiPrice + '</strong></li><li><span ' + optCss + '></span> ' + apiText + '</li></ul> </div><div class="media-right"> <a href="#" id="' + item.api_id + '" onclick="searchaddCart(' + item.id + ')" class="add-basket ' + item.id + delCart + '">Læg i kurv</a> </div></div>';
+                                resultData += '<div class="media-custom"> <div class="media-left"> <a href="' + route + '"><img src="' + imgUrl + productImg + '" alt="' + item.alt_image + '" class="img-fluid"></a> </div><div class="media-body"> <a href="' + route + '"> <h3>' + item.api_name + '</h3> </a> <p>' + item.api_id + '</p><p>' + item.short_text + '</p><ul> <li><strong>' + apiPrice + '</strong></li><li><span ' + optCss + '></span> ' + apiText + '</li></ul> </div><div class="media-right"> <a href="#" id="' + item.api_id + '" onclick="searchaddCart(' + item.id + ')" class="add-basket ' + item.id + delCart + '">Læg i kurv</a> </div></div>';
                             }
                         });
                         data.content.contents.data.forEach(function (item) {
@@ -348,6 +349,39 @@ $meta = getMetaDetails($page->get('id'));
                         $('#failedModal').modal('show');
                     }
                     $('#landmailingForm').trigger("reset");
+                }
+            });
+            return false;
+        }
+    });
+</script>
+
+<script>
+
+    $("#forgotPass").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true,
+            },
+        }, errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        },
+        submitHandler: function () {
+            $.ajax({
+                type: 'POST',
+                url: "<?= url('forgotPass')?>",
+                data: "email=" + $('#forgotEmail').val() + '&_token=<?= csrf_token()?>',
+                success: function (data) {
+                  location.reload();
                 }
             });
             return false;

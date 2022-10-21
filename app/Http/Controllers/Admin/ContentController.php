@@ -15,12 +15,12 @@ class ContentController extends Controller
 {
     public function dynamicPages()
     {
-        return view('admin.content.list',['page' => 'home_page']);
+        return view('admin.content.list', ['page' => 'home_page']);
     }
 
     public function editHome($page)
     {
-        $result     = getContent1($page);
+        $result = getContent1($page);
         $homeVideos = array();
 
 
@@ -28,11 +28,11 @@ class ContentController extends Controller
             $homeVideos = getHomeVideos();
         }
 
-        if($result['success'] == 1){
+        if ($result['success'] == 1) {
 
-            return view('admin.content.editHome',['content' => $result['content'],'page' => $page, 'homeVideos' => $homeVideos]);
+            return view('admin.content.editHome', ['content' => $result['content'], 'page' => $page, 'homeVideos' => $homeVideos]);
 
-        }else{
+        } else {
 
             session()->flash('alert-class', 'success');
             session()->flash('message', $result['message']);
@@ -44,26 +44,27 @@ class ContentController extends Controller
     public function edit_footer(Request $request)
     {
         $footer = Footer::all();
-        return view('admin.content.editFooter',['footer' => $footer]);
+        return view('admin.content.editFooter', ['footer' => $footer]);
     }
 
     public function update_footer(Request $request)
     {
         $x = 1;
-        foreach($request->heading as $key=>$value){
-            $id =  $request->id[$key];
-            $url =  $request->url[$key];
-            $heading =  $request->heading[$key];
-            $st = "status".$x++;
+        foreach ($request->heading as $key => $value) {
+            $id = $request->id[$key];
+            $url = $request->url[$key];
+            $heading = $request->heading[$key];
+            $st = "status" . $x++;
             $status = $request->$st;
-            Footer::where('id',$id)->update(['heading'=>$heading,'url'=>$url,'status'=>$status]);
+            Footer::where('id', $id)->update(['heading' => $heading, 'url' => $url, 'status' => $status]);
         }
         session()->flash('alert-class', 'success');
         session()->flash('message', 'Data has successfully updated');
         return redirect()->back();
     }
 
-    public function updateContent(Request $request){
+    public function updateContent(Request $request)
+    {
 
         $result = contentUpdate($request);
         session()->flash('alert-class', 'success');
@@ -155,7 +156,7 @@ class ContentController extends Controller
 
             return view('admin.content.editTeam', ['member' => $response['data']]);
 
-        }else{
+        } else {
             session()->flash('alert-class', 'success');
             session()->flash('message', $response['message']);
 
@@ -163,19 +164,21 @@ class ContentController extends Controller
 
         }
 
-    }public function deleteTeam($id)
-{
+    }
 
-    $team = Team::where('id', $id)->first();
-    $storage = storage_path('app/'. $team->image);
+    public function deleteTeam($id)
+    {
+
+        $team = Team::where('id', $id)->first();
+        $storage = storage_path('app/' . $team->image);
 //        removeFile('public/' . $team->image);
 //        removeFile($storage);
-    $team->delete();
-    session()->flash('alert-class', 'success');
-    session()->flash('message', "$team->name member  deleted successfully.");
-    return redirect("/admin/addTeam");
+        $team->delete();
+        session()->flash('alert-class', 'success');
+        session()->flash('message', "$team->name member  deleted successfully.");
+        return redirect("/admin/addTeam");
 
-}
+    }
 
     public function updateTeam(Request $request)
     {
@@ -188,16 +191,16 @@ class ContentController extends Controller
 
     public function editSupport()
     {
-        $id                 = 1;
-        $service            = Service::where('id', $id)->first();
-        $contexts           = Context::get();
+        $id = 1;
+        $service = Service::where('id', $id)->first();
+        $contexts = Context::get();
         $productContexts = [];
-        if (isset($service->contexts)){
-            $productContexts    = $service->contexts->pluck('id')->toArray();
+        if (isset($service->contexts)) {
+            $productContexts = $service->contexts->pluck('id')->toArray();
         }
 
 
-        return view('admin.content.editSupport', ['contexts' => $contexts,'productContexts' => $productContexts, 'service' => $service, 'id' => $id]);
+        return view('admin.content.editSupport', ['contexts' => $contexts, 'productContexts' => $productContexts, 'service' => $service, 'id' => $id]);
 
     }
 
@@ -212,8 +215,9 @@ class ContentController extends Controller
 
     public function login_reg(Request $request)
     {
-        $data['details'] = Content::where('name','login')->orWhere('name','signup')->orWhere('name','signup_footer')->orWhere('name','signup_footerLink')->orWhere('name','signup_footer_contentLink')->get();
-        return view('admin.content.login-reg',$data);
+        $data['details'] = Content::where('name', 'login')->orWhere('name', 'signup')->orWhere('name', 'signup_footer')->orWhere('name', 'signup_footerLink')->orWhere('name', 'signup_footer_contentLink')->get();
+        $data['forgot'] = Content::where('page','forgot')->get();
+        return view('admin.content.login-reg', $data);
     }
 
     public function update_login_reg(Request $request)
@@ -223,11 +227,14 @@ class ContentController extends Controller
         $signup_footer = $request->signup_footer;
         $signup_footerLink = $request->signup_footerLink;
         $signup_footer_contentLink = $request->signup_footer_contentLink;
-        Content::where('name','login')->update(['data'=>$login]);
-        Content::where('name','signup')->update(['data'=>$reg]);
-        Content::where('name','signup_footer')->update(['data'=>$signup_footer]);
-        Content::where('name','signup_footerLink')->update(['data'=>$signup_footerLink]);
-        Content::where('name','signup_footer_contentLink')->update(['data'=>$signup_footer_contentLink]);
+        Content::where('name', 'login')->update(['data' => $login]);
+        Content::where('name', 'signup')->update(['data' => $reg]);
+        Content::where('name', 'signup_footer')->update(['data' => $signup_footer]);
+        Content::where('name', 'signup_footerLink')->update(['data' => $signup_footerLink]);
+        Content::where('name', 'signup_footer_contentLink')->update(['data' => $signup_footer_contentLink]);
+
+        Content::where('name', 'forgot_password_content')->update(['data' => $request->forgot_password_content]);
+        Content::where('name', 'forgot_password_link')->update(['data' => $request->forgot_password_link]);
 
         session()->flash('alert-class', 'success');
         session()->flash('message', "Data has been successfully updated.");
@@ -238,7 +245,7 @@ class ContentController extends Controller
     public function newsletters(Request $request)
     {
         $data['news'] = newsletters();
-        return view('admin.content.newsletter',$data);
+        return view('admin.content.newsletter', $data);
     }
 
     public function update_newsletter(Request $request)
@@ -254,45 +261,46 @@ class ContentController extends Controller
 
     public function kontakat_os_modal()
     {
-        $data['details'] =  kontakat_os();
-        return view('admin.content.kontakat_os',$data);
+        $data['details'] = kontakat_os();
+        return view('admin.content.kontakat_os', $data);
     }
 
     public function update_kontakt_os_modal(Request $request)
     {
         // dd($request->all());
-        Content::where('page','kontakt_page')->where('name','header_content')->update(['data'=>$request->header_content]);
-        Content::where('page','kontakt_page')->where('name','btn_name')->update(['data'=>$request->btn_name]);
-        Content::where('page','kontakt_page')->where('name','kontakt_page_email')->update(['data'=>$request->kontakt_page_email]);
+        Content::where('page', 'kontakt_page')->where('name', 'header_content')->update(['data' => $request->header_content]);
+        Content::where('page', 'kontakt_page')->where('name', 'btn_name')->update(['data' => $request->btn_name]);
+        Content::where('page', 'kontakt_page')->where('name', 'kontakt_page_email')->update(['data' => $request->kontakt_page_email]);
         return redirect()->back();
     }
 
     public function bliv_ringet_modal(Request $request)
     {
-        $data['details'] =  bliv_ringet();
-        return view('admin.content.bliv_ringet',$data);
+        $data['details'] = bliv_ringet();
+        return view('admin.content.bliv_ringet', $data);
     }
 
     public function update_bliv_ringet_modal(Request $request)
     {
         // dd($request->all());
-        Content::where('page','bliv_ringet')->where('name','content_bliv')->update(['data'=>$request->content_bliv]);
-        Content::where('page','bliv_ringet')->where('name','btn_bliv')->update(['data'=>$request->btn_bliv]);
+        Content::where('page', 'bliv_ringet')->where('name', 'content_bliv')->update(['data' => $request->content_bliv]);
+        Content::where('page', 'bliv_ringet')->where('name', 'btn_bliv')->update(['data' => $request->btn_bliv]);
         return redirect()->back();
     }
 
     public function checkout_terms(Request $request)
     {
-       $data['details'] = getAllCheckout_terms();
-       return view('admin.content.checkoutTerms',$data);
+        $data['details'] = getAllCheckout_terms();
+        return view('admin.content.checkoutTerms', $data);
     }
 
-    public function update_checkout_terms(Request $request){
+    public function update_checkout_terms(Request $request)
+    {
         // dd($request->all());
-        Content::where('page','checkout')->where('name','first_terms_and_conditions')->update(['data'=>$request->first_terms_and_conditions]);
-        Content::where('page','checkout')->where('name','first_terms_and_conditions_link')->update(['data'=>$request->first_terms_and_conditions_link]);
-        Content::where('page','checkout')->where('name','second_terms_and_conditions')->update(['data'=>$request->second_terms_and_conditions]);
-        Content::where('page','checkout')->where('name','second_terms_and_conditions_link')->update(['data'=>$request->second_terms_and_conditions_link]);
+        Content::where('page', 'checkout')->where('name', 'first_terms_and_conditions')->update(['data' => $request->first_terms_and_conditions]);
+        Content::where('page', 'checkout')->where('name', 'first_terms_and_conditions_link')->update(['data' => $request->first_terms_and_conditions_link]);
+        Content::where('page', 'checkout')->where('name', 'second_terms_and_conditions')->update(['data' => $request->second_terms_and_conditions]);
+        Content::where('page', 'checkout')->where('name', 'second_terms_and_conditions_link')->update(['data' => $request->second_terms_and_conditions_link]);
         return redirect()->back();
     }
 

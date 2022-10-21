@@ -169,7 +169,7 @@
                                                 ?>
                                                 <div class="price">
                                                     <p><span id="perPrice5128-22-GM"
-                                                             class="itemPrice"><?= str_replace(",",".",number_format($cartData->sellPrice))?></span>
+                                                             class="itemPrice"><?= $cartData->sellPrice ?></span>
                                                         kr. ekskl. moms </p>
                                                     <?php $singlePrice[] = $cartData->sellPrice?>
                                                 </div>
@@ -195,7 +195,7 @@
                             ?>
                             <div class="total-foot">
                                 <h3>Total:</h3>
-                                <h3><span id="cartPrice"><?php if (isset($singlePrice)) { echo str_replace(",",".",number_format(array_sum($singlePrice))); }?> </span> ekskl. moms</h3>
+                                <h3><span id="cartPrice"><?php if (isset($singlePrice)) { echo array_sum($singlePrice); }?> </span> ekskl. moms</h3>
                             </div>
                             <?php }?>
                         </div>

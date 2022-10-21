@@ -242,7 +242,8 @@ class HomeController extends Controller
     {
         $menus = Menu::where('status', 1)->get();
         $details = Content::where('name', 'login')->orWhere('name', 'signup')->orWhere('name', 'signup_footer')->orWhere('name', 'signup_footerLink')->orWhere('name', 'signup_footer_contentLink')->get();
-        return view('login_register', ["menus" => $menus, "details" => $details,]);
+        $forgot = Content::where('page','forgot')->get();
+        return view('login_register', ["menus" => $menus, "details" => $details,"forgot" => $forgot]);
     }
 
     public function contact()

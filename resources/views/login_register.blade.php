@@ -51,7 +51,7 @@
                                     </div>
 
                                     <div class="forgot-password">
-                                        <a href="javascript:;">Har du glemt dit password?</a>
+                                        <a href="{{ url(''). $forgot[1]->data}}">{{$forgot[0]->data}}</a>
                                     </div>
 
                                     <div class="form-group">

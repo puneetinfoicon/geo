@@ -151,6 +151,8 @@ Route::get('/reset-password/{token}', [HomeController::class, 'resetPassUser']);
 Route::post('/submit_reset_password', [HomeController::class, 'submitResetPassword'])->name('submitResetPassword');
 
 Route::get('/getUserData', [ProfileController::class, 'getUserData'])->name('getUserData');
+Route::post('/forgotPass', [ProfileController::class, 'forgotPass'])->name('forgotPass');
+
 
 ///////// Admin Route Start  //////////////
 

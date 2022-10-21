@@ -82,6 +82,24 @@
                                         </div>
                                     </div>
                                @endisset
+                               @isset($forgot[0])
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label for="{{$forgot[0]->name}}"><b>{{ucwords(str_replace('_',' ',$forgot[0]->name))}} </b></label>
+                                            <textarea name="{{$forgot[0]->name}}" rows="3" class="form-control" placeholder="{{$forgot[0]->name}} Content">{{$forgot[0]->data}}</textarea>
+                                        </div>
+                                    </div>
+                               @endisset
+
+                               @isset($forgot[1])
+                                    <div class="col-md-12 mt-3">
+                                        <label for="policy_link"><b> Forgot Password link</b></label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon3"><?= url('')?></span>
+                                            <input type="text" name="{{$forgot[1]->name}}" class="form-control"  aria-describedby="basic-addon3" value="{{$forgot[1]->data}}">
+                                        </div>
+                                    </div>
+                               @endisset
                                 <div class="col-12">
                                     <button class="btn btn-primary px-4">Update</button>
                                 </div>
