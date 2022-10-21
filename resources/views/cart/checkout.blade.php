@@ -41,7 +41,7 @@
                                 <div class="alert alert-danger" role="alert">{{Session::get('message')}}</div>
                             @endif
                             <div class="form-sec">
-                                <form action="{{route('deliveryAddress.insert')}}" method="post" id="myform">
+                                <!--form action="{{route('deliveryAddress.insert')}}" method="post" id="myform">
                                     @csrf
                                     <div class="row">
                                         <div class="form-group col-md-11">
@@ -146,78 +146,77 @@
                                     <div class="form-group mt-25">
                                         <button class="btn btn-submit active-bg">Tilføj adresse</button>
                                     </div>
-                                </form>
-                               {{-- <br>
-                                <h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Add
-                                            new delivery address</font></font></h3>
-                                <div class="custom-checkbox">
-                                    <div class="form-group">
-                                        <input type="checkbox" id="new_address">
-                                        <label for="new_address"><font style="vertical-align: inherit;"><font
-                                                    style="vertical-align: inherit;">Use a different billing
-                                                    address</font></font></label>
-                                    </div>
-                                </div>
-                                <div class="disable-field">
-                                    <div class="row">
-                                        <div class="form-group col-md-8">
-                                            <label for="cname00"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">Company
-                                                        name</font></font></label>
-                                            <div class="pos-rel">
-                                                <input type="text" name="cname" id="cname00" class="form-control"
-                                                       placeholder="Company name">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-md-8">
-                                            <label for="cname00"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">Attention</font></font></label>
-                                            <div class="pos-rel">
-                                                <input type="text" name="cname" id="cname00" class="form-control"
-                                                       placeholder="Name and surname">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-md-8">
-                                            <label for="cname00"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">Delivery address</font></font></label>
-                                            <div class="pos-rel">
-                                                <input type="text" name="cname" id="cname00" class="form-control"
-                                                       placeholder="Address">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-8">
+                                </form-->
+                                    <div class="form-sec">
+                                        <form action="">
                                             <div class="row">
-                                                <div class="form-group col-md-5 pr-1">
-                                                    <label for="address"><font style="vertical-align: inherit;"><font
-                                                                style="vertical-align: inherit;">Zip code</font></font></label>
-                                                    <div class="pos-rel">
-                                                        <input type="text" name="Postnummer" id="Postnummer"
-                                                               class="form-control" placeholder="Zip code">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group col-md-7 pl-1">
-                                                    <label for="by"><font style="vertical-align: inherit;"><font
-                                                                style="vertical-align: inherit;">By</font></font></label>
-                                                    <div class="pos-rel">
-                                                        <input type="text" name="by" id="by" class="form-control"
-                                                               placeholder="By">
+                                                <div class="form-group col-md-11">
+                                                    <div class="pos-rel custom-select-2">
+                                                        <select name="" id="" class="form-control">
+                                                            @foreach($addresses as $address)
+                                                                <option
+                                                                    value="{{$address->deliveryAddressCode}}">{{$address->name . ', '.$address->address . ', '.$address->address2 . ', '.$address->postalNo . ', '.$address->postalCity}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <br>
+
+                                            <h3>Tilføj ny leveringsadresse</h3>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="cname00">Firmanavn</label>
+                                                    <div class="pos-rel">
+                                                        <input type="text" name="name" id="cname00" class="form-control" placeholder="Firmanavn">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="cname00">Attention</label>
+                                                    <div class="pos-rel">
+                                                        <input type="text" name="cname" id="cname00" class="form-control" placeholder="Navn og efternavn">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group col-md-8">
+                                                    <label for="cname00">Leveringsadresse</label>
+                                                    <div class="pos-rel">
+                                                        <input type="text" name="cname" id="cname00" class="form-control" placeholder="Adresse">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-5 pr-1">
+                                                            <label for="address">Postnummer</label>
+                                                            <div class="pos-rel">
+                                                                <input type="text" name="Postnummer" id="Postnummer" class="form-control" placeholder="Postnummer">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-md-7 pl-1">
+                                                            <label for="by">By</label>
+                                                            <div class="pos-rel">
+                                                                <input type="text" name="by" id="by" class="form-control" placeholder="By">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mt-25">
+                                                <button class="btn btn-submit active-bg">Tilføj adresse</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
---}}
 
                             </div>
                         </div>
@@ -232,11 +231,26 @@
                             <p>Vælg din foretrukne leveringsmetode.</p>
                             <?php
                             $count = 0;
+                            $phyPrice = [];
+                            $gpsNongps = [];
                             $customerNumber = getCartDetails()['cartList']->customerNo;
                             $dataObj = array();
                             $dataObj['customerNumber'] = (string)$customerNumber;
+                            $subsCripTion = 0;
                             if (isset(getCartDetails()['cartList'])){
                                 foreach (getCartDetails()['cartList']->lines as $type){
+                                  //  echo "<pre>";
+                                   // print_r($type);
+                                    if($type->productType =="Physical"){
+                                        $phyPrice[] =  $type->sellPrice;
+                                    }else{
+                                        $gpsNongps[] =  $type->sellPrice;
+                                    }
+
+                                    if (in_array($type->productType,['GPSNetSubscription','ServiceAgreement','Hotline','Sim'])){
+                                        $subsCripTion++;
+                                    }
+                                   // echo "</pre>";
                                     $dataObj['productList'][$count] = new \stdClass;
                                     $dataObj['productList'][$count]->productNumber = $type->productNumber;
                                     $dataObj['productList'][$count]->requestedQuantity = $type->quantity;
@@ -259,12 +273,12 @@
                                                 ?>
                                             <div class="media-check">
                                                 <div class="custom-radio">
-                                                    <input type="radio" id="{{$deliveryType->deliveryCode}}" name="radio-group" value="{{$deliveryType->price}}" {{$checked}}>
+                                                    <input type="radio" id="{{$deliveryType->deliveryCode}}" onchange="gateLevering()" name="radio_group" value="{{$deliveryType->price}}" {{$checked}}>
                                                     <label for="{{$deliveryType->deliveryCode}}">{{$deliveryType->primaryText}} <br> {{$deliveryType->secondaryText}}</label>
                                                 </div>
 
                                                 <div class="price">
-                                                    <p>{{str_replace(",",".",number_format($deliveryType->price))}} kr.</p>
+                                                    <p>{{$deliveryType->price}} kr.</p>
                                                 </div>
                                             </div>
                                             @endforeach
@@ -367,43 +381,46 @@
                                     }*/
                                     ?>
                                     <div class="price-ttt first-ttt">
-                                        <p>Varekøb: <span>450.00</span></p>
+                                        <p>Varekøb: <input type="text" class="sumPhy d-none" value="<?= array_sum($phyPrice)?>"> <span><?= array_sum($phyPrice)?></span></p>
                                         <p>Klargøring: <span>xxxx,xx</span></p>
-                                        <p>Rabat: <span>-2.500,00</span></p>
-                                        <p>Levering: <span>100,00</span></p>
+                                        <p>Rabat: <span>-xxxx,xx</span></p>
+                                        <p>Levering:  <input type="text" class="levData d-none" value="00.00"> <span class="levData1">00.00</span></p>
                                     </div>
 
                                     <div class="price-ttt sec-ttt">
-                                        <p>Varer eksl. moms: <span>5.700,00</span></p>
-                                        <p>Abonnementer: <span>500,00</span></p>
-                                        <p><strong>Total eksl. moms:</strong> <span><strong>6.200,00</strong></span></p>
+                                        <p>Varer eksl. moms: <input type="text" class="Varer_eksl d-none" value="00.00"> <span class="Varer_eksl1">00.00</span></p>
+                                        <p>Abonnementer: <input type="text" class="gpsNongps d-none" value="<?= array_sum($gpsNongps)?>"> <span><?= array_sum($gpsNongps)?> </span></p>
+                                        <p><strong>Total eksl. moms:</strong> <span> <input type="text" class="total_eksl d-none" value="00.00"> <strong class="total_eksl1">00.00</strong></span></p>
                                     </div>
 
                                     <div class="price-ttt sec-ttt">
-                                        <p>Moms (25%): <span>2.300,00</span></p>
-                                        <p>Total inkl. moms: <span>DKK 8.500,00</span></p>
+                                        <p>Moms (25%): <input type="text" class="momDiscount d-none" value="00.00"> <span class="momDiscount1">00.00</span></p>
+                                        <p>Total inkl. moms: <input type="text" class="total_inkl_moms d-none" value="00.00"> <span>DKK </span><span class="total_inkl_moms1">DKK 00.00</span></p>
                                     </div>
 
                                     <div class="left-section register-section">
                                         <div class="custom-checkbox">
+                                            <?php
+                                            echo "<pre>";
+                                            print_r(getAllCheckout_terms()[0]->data);
+                                            echo "</pre>";
+                                            ?>
                                             <div class="form-group">
                                                 <input type="checkbox" id="check2">
-                                                <label for="check2">Jeg accepterer <a href="#">Geoteams
-                                                        forretningsbetingelser</a></label>
+                                                <label for="check2">Jeg accepterer <a href="@isset(getAllCheckout_terms()[1]) {{ url('').getAllCheckout_terms()[1]->data}} @endisset">@isset(getAllCheckout_terms()[0]) {{getAllCheckout_terms()[0]->data}} @endisset</a></label>
                                                 <div class="d-none" id="fCheck">Please accept Geoteam's terms and
                                                     conditions *
                                                 </div>
                                             </div>
-
+                                           {{-- @if($subsCripTion )--}}
                                             <div class="form-group">
                                                 <input type="checkbox" id="check3">
-                                                <label for="check3">Jeg accepterer <a href="#">Geoteams
-                                                        abonnementsbetingelser for GPSnet</a></label>
+                                                <label for="check3">Jeg accepterer <a href="@isset(getAllCheckout_terms()[3]) {{ url('').getAllCheckout_terms()[3]->data}} @endisset">@isset(getAllCheckout_terms()[2]) {{getAllCheckout_terms()[2]->data}} @endisset</a></label>
                                                 <div class="d-none" id="sCheck">Please accept Geoteams
                                                     abonnementsbetingelser for GPSnet *
                                                 </div>
                                             </div>
-
+                                           {{-- @endif--}}
                                         </div>
                                     </div>
                                     <button class="btn-submit checkout">Gennemfør køb</button>
@@ -412,14 +429,47 @@
                             </div>
                         </div>
                         <br>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <script>
+        $(document).ready(function (){
+            $('.levData1').html($('input[name="radio_group"]:checked').val())
+            $('.levData').attr('value',$('input[name="radio_group"]:checked').val())
+            calculateValues();
+        })
+
+        function calculateValues(){
+            var levData = parseFloat($('input[name="radio_group"]:checked').val());
+            var sumPhy = parseFloat("<?= array_sum($phyPrice)?>");
+
+            var Varer_eksl = levData + sumPhy;
+
+            $('.Varer_eksl1').html(Varer_eksl);
+            $('.Varer_eksl').attr('value',Varer_eksl);
+
+            var total_eksl = parseFloat(Varer_eksl) + parseFloat($('.gpsNongps').val());
+
+            $('.total_eksl').attr('value',total_eksl);
+            $('.total_eksl1').html(total_eksl);
+
+            var momDiscount = parseFloat(total_eksl) * 25/100;
+            $('.momDiscount').attr('value',parseFloat(momDiscount));
+
+            $('.momDiscount1').html(parseFloat(momDiscount));
+
+            $('.total_inkl_moms').attr('value',parseFloat(momDiscount) + parseFloat(total_eksl));
+            $('.total_inkl_moms1').html(parseFloat(momDiscount) + parseFloat(total_eksl))
+        }
+
+        function gateLevering()
+        {
+            $('.levData1').html($('input[name="radio_group"]:checked').val());
+            $('.levData').attr('value',$('input[name="radio_group"]:checked').val())
+            calculateValues();
+        }
         function checkPaymentType(data) {
             if (data == 'invoice') {
                 $('.invoice').removeClass('d-none');

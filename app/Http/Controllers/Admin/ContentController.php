@@ -281,6 +281,21 @@ class ContentController extends Controller
         return redirect()->back();
     }
 
+    public function checkout_terms(Request $request)
+    {
+       $data['details'] = getAllCheckout_terms();
+       return view('admin.content.checkoutTerms',$data);
+    }
+
+    public function update_checkout_terms(Request $request){
+        // dd($request->all());
+        Content::where('page','checkout')->where('name','first_terms_and_conditions')->update(['data'=>$request->first_terms_and_conditions]);
+        Content::where('page','checkout')->where('name','first_terms_and_conditions_link')->update(['data'=>$request->first_terms_and_conditions_link]);
+        Content::where('page','checkout')->where('name','second_terms_and_conditions')->update(['data'=>$request->second_terms_and_conditions]);
+        Content::where('page','checkout')->where('name','second_terms_and_conditions_link')->update(['data'=>$request->second_terms_and_conditions_link]);
+        return redirect()->back();
+    }
+
 }
 
 // echo "<pre>"; print_r($result); echo "</pre>";  die;

@@ -331,7 +331,7 @@
                 <div class="modal-content">
 
                     <div class="modal-body text-center">
-                        <p class="mb-0"><strong>{{htmlspecialchars_decode(Session::get('message')); }}</strong></p>
+                        <p class="mb-0"><strong>{{htmlspecialchars_decode(Session::get('message')) }}</strong></p>
                     </div>
 
                 </div>
@@ -340,10 +340,7 @@
         </div>
     @endif
 
-
     @yield('content')
-
-
 </div>
 
 

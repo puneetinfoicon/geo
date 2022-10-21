@@ -97,6 +97,7 @@ Route::post('/removeItem', [CartController::class, 'removeItem'])->name('cart.re
 Route::get('/share-cart/{key}', [CartController::class, 'shareCart'])->name('cart.share');
 Route::get('/generate-cart-link', [CartController::class, 'generateLink'])->name('cart.linkGenerate');
 Route::get('/send-cart-link', [CartController::class, 'sendLink'])->name('cart.linkSend');
+Route::get('/sharedBasketDetails', [CartController::class, 'sharedBasketDetails'])->name('sharedBasketDetails');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/Address/save', [CartController::class, 'address_save'])->name('deliveryAddress.insert');
 Route::get('/check-payment-method', [CartController::class, 'check_payment_method'])->name('check-payment-method');
@@ -332,6 +333,9 @@ Route::middleware(['Admincheck'])->group(function () {
 
         Route::get('/bliv_ringet_modal', [ContentController::class, 'bliv_ringet_modal'])->name('bliv_ringet_modal');
         Route::post('/update_bliv_ringet_modal', [ContentController::class, 'update_bliv_ringet_modal'])->name('update_bliv_ringet_modal');
+
+        Route::get('/checkout_terms', [ContentController::class, 'checkout_terms'])->name('checkout_terms');
+        Route::post('/update_checkout_terms', [ContentController::class, 'update_checkout_terms'])->name('update_checkout_terms');
 
 
         //

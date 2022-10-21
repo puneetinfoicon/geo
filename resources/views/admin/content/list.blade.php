@@ -234,6 +234,29 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td class="productlist">
+                    <a class="d-flex align-items-center gap-2" href="#">
+                        <div>
+                        <h6 class="mb-0 product-title">9</h6>
+                        </div>
+                    </a>
+                </td>
+                <td class="productlist">
+                    <a class="d-flex align-items-center gap-2" href="#">
+                        <div>
+                        <h6 class="mb-0 product-title"> Checkout Page (Terms & Conditions) </h6>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center gap-3 fs-6">
+                        <a href="{{route('checkout_terms')}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Checkout Page (Terms & Conditions)" aria-label="Checkout Page (Terms & Conditions)">
+                            <img src="{{asset('admin-assets/images/edit.png')}}" alt="">
+                        </a>
+                    </div>
+                </td>
+            </tr>
 
             <!--tr>
 

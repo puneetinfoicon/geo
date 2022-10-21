@@ -3848,5 +3848,10 @@ if (!function_exists('sendMail')) {
         return DB::select( DB::raw("SELECT categories.id as caegoryId,categories.name,categories.image, areas.id as areaId FROM areas LEFT JOIN products_areas on products_areas.area_id = areas.id LEFT JOIN products_categories on products_categories.product_id = products_areas.product_id LEFT JOIN categories on categories.id = products_categories.category_id WHERE areas.name like 'Referencenet%' GROUP BY categories.id ORDER BY categories.rank ASC") );
     }
 
+    function getAllCheckout_terms()
+    {
+        return Content::where('page','checkout')->get();
+    }
+
 
 }

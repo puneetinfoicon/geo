@@ -354,6 +354,7 @@ $meta = getMetaDetails($page->get('id'));
         }
     });
 </script>
+
 <script>
     $("#landburgForm").validate({
         rules: {

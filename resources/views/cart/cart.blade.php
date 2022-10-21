@@ -98,7 +98,7 @@
                                 <div class="share-dropdown dropdown " data-toggle="tooltip" data-placement="top"
                                      title="Gem eller send kurv">
                                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="assets/img/share.png" alt="" class="img-fluid">
+                                        <img src="<?= asset('assets/img/share.png')?>" alt="" class="img-fluid">
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item getCartLink" href="javascript:;" data-toggle="modal"
@@ -289,9 +289,13 @@
             $.ajax({
                 type: 'get',
                 url: "{{url('/generate-cart-link')}}",
-                data: '_token={{ csrf_token() }}',
+                data: '_token={{ csrf_token() }}&basketId='+$('#basketId').html(),
                 success: function (data) {
-                    $('#copyClipboard').attr('value', data.url)
+                    if(data !=0){
+                        $('#copyClipboard').attr('value', data);
+                    }else{
+                        $('#copyClipboard').attr('value', 0);
+                    }
                 }
 
             })
@@ -308,24 +312,24 @@
                     $('.email').focus();
                 } else {
                     generateLink();
-                    $.ajax({
-                        type: 'get',
-                        url: "{{url('/send-cart-link')}}",
-                        data: "_token={{ csrf_token() }}&url=" + $('#copyClipboard').val() + '&email=' + $('.email').val(),
-                        success: function (data) {
-                            if (data.status != undefined) {
-                                $('.email').val('');
-                                // $('#validaor').css('color','green');
-                                $('#validaor').html(data.message);
-                            } else {
-                                $('.email').val('');
-                                $('.email').focus();
-                                // $('#validaor').css('color','red');
-                                $('#validaor').html(data.message);
+                    setTimeout(function() {
+                        $.ajax({
+                            type: 'get',
+                            url: "{{url('/send-cart-link')}}",
+                            data: "_token={{ csrf_token() }}&url=" + $('#copyClipboard').val() + '&email=' + $('.email').val()+'&basketId='+$('#basketId').html(),
+                            success: function (data) {
+                                if (data.status != undefined) {
+                                    $('.email').val('');
+                                    $('#validaor').html(data.message);
+                                    location.reload();
+                                } else {
+                                    $('.email').val('');
+                                    $('.email').focus();
+                                    $('#validaor').html(data.message);
+                                }
                             }
-                        }
-
-                    })
+                        })
+                    }, 2000);
                 }
             })
 
