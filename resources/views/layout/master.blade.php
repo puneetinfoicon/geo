@@ -335,7 +335,10 @@ if(isset($area->name)){
         </ul>
     </div>
 
+    <a href="<?php  echo url('/cart'); ?>" class="btn checkout-btn" >Gå til kurv</a>
+{{--
     <a href="<?php if(isset($ss)) { echo url('/cart');} else{ echo "javascript:;";}?>" class="btn checkout-btn" >Gå til kurv</a>
+--}}
 </div>
 
 <!-- /basket-box -->
@@ -981,8 +984,7 @@ if(isset($area->name)){
                         var color = item.priceApi.availability.color;
                         var apiText = item.priceApi.availability.text;
                         let number = item.priceApi.basePrice;
-                        number = number.toLocaleString();
-                        var apiPrice = parseFloat(number.replace(/,/gi, ".")) + '  kr. ekskl. moms';
+                        var apiPrice = number.toLocaleString("da-DK", { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + '  kr. ekskl. moms';
                         var optCss = "style='background-color:" + color + "'";
                     } else {
                         var color = '';
@@ -994,7 +996,7 @@ if(isset($area->name)){
                     var ppName = pName.replace(/\//gi, "-");
                     var pUrl = item.id+'/'+  ppName.replace(/"/g, "");
                     //console.log(pUrl);
-                    $('#search_result').append(' <div class="media-custom"> <div class="media-left"> <a href="<?= url('/produkt/null/')?>/' + item.id + '/' + pUrl + '"><img src="' + imgUrl + '/' + productImg + '" alt="'+item.alt_image+'"  class="img-fluid"></a> </div><div class="media-body d-flex flex-wrap align-content-between flex-column justify-content-between"> <div class="first-sec"> <a href="<?= url('/produkt/null/')?>/'+pUrl+'"> <h3>' + item.api_name + '</h3> </a> <p><a href="<?= url('/produkt/null/')?>/'+pUrl+'">' + item.api_id + '</a></p><p>' + item.short_text + '</p></div><ul> <li><strong>' + apiPrice + '</strong></li><li><span ' + optCss + '></span>' + apiText + '</li></ul> </div><div class="media-right">  <a href="#" id="'+item.api_id+'"  onclick="searchaddCart('+item.id+')" class="add-basket '+item.id+'">Læg i kurv</a> </div></div>')
+                    $('#search_result').append(' <div class="media-custom"> <div class="media-left"> <a href="<?= url('/produkt/null/')?>/' + pUrl + '"><img src="' + imgUrl + '/' + productImg + '" alt="'+item.alt_image+'"  class="img-fluid"></a> </div><div class="media-body d-flex flex-wrap align-content-between flex-column justify-content-between"> <div class="first-sec"> <a href="<?= url('/produkt/null/')?>/'+pUrl+'"> <h3>' + item.api_name + '</h3> </a> <p><a href="<?= url('/produkt/null/')?>/'+pUrl+'">' + item.api_id + '</a></p><p>' + item.short_text + '</p></div><ul> <li><strong>' + apiPrice + '</strong></li><li><span ' + optCss + '></span>' + apiText + '</li></ul> </div><div class="media-right">  <a href="#" id="'+item.api_id+'"  onclick="searchaddCart('+item.id+')" class="add-basket '+item.id+'">Læg i kurv</a> </div></div>')
                     x++;
                 });
 
@@ -1156,8 +1158,7 @@ if(isset($area->name)){
                                     var color = item.priceApi.availability.color;
                                     var apiText = item.priceApi.availability.text;
                                     let number = item.priceApi.basePrice;
-                                    number = number.toLocaleString();
-                                    var apiPrice = parseFloat(number.replace(/,/gi, ".")) + '  kr. ekskl. moms';
+                                    var apiPrice = number.toLocaleString("da-DK", { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + '  kr. ekskl. moms';
                                     var optCss = "style='background-color:" + color + "'";
                                 } else {
                                     var color = '';

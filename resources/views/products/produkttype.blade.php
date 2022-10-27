@@ -37,7 +37,7 @@
                                         <h4><a href="{{route('produkt',[$area->id,$product->id, Str::slug($product->api_name)])}}">{{$product->api_name}}</a></h4>
                                         <p><?= $product->short_text ?></p>
                                         <ul>
-                                            <li><strong> @if($product->hide_amount !=1){{ isset($productApiPrices[$product->api_id]) ? str_replace(",",".",number_format($productApiPrices[$product->api_id]->basePrice)): "0"}} kr. ekskl. moms @else Ring for en pris @endif</strong></li>
+                                            <li><strong> @if($product->hide_amount !=1){{ isset($productApiPrices[$product->api_id]) ? number_format($productApiPrices[$product->api_id]->basePrice, 2, ',', '.') : "0"}} kr. ekskl. moms @else Ring for en pris @endif</strong></li>
                                             <li><span class="green"  style="background-color: <?= isset($productApiPrices[$product->api_id]) ? $productApiPrices[$product->api_id]->availability->color: "white"?>"></span> <?= isset($productApiPrices[$product->api_id]) ? $productApiPrices[$product->api_id]->availability->text: ""?></li>
                                         </ul>
                                     </div>

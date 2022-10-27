@@ -45,23 +45,18 @@ class CartController extends Controller
 
     public function sendLink(Request $request)
     {
-
-        if (\Session::get('api_token')) {
             $token = Session::get('api_token');
-            $pDetails = getProductPrice();
-            $senderEmail  = $pDetails[1]->Email;
-            $senderName  = $pDetails[1]->Name;
-            $array = ['recipientEmail'=>$request->email,'senderEmail'=>$senderEmail,'senderName'=>$senderName,'message'=>$senderEmail];
+            $senderEmail  = $request->sender_email;
+            $senderName  = $request->sender_name;
+            $array = ['recipientEmail'=>$request->receiver_email,'senderEmail'=>$senderEmail,'senderName'=>$senderName,'message'=>$request->message];
             $api_url = env('BASE_API_URL');
-            $response = Http::withToken($token)->post($api_url .'Basket/'.$request->basketId.'/SendBasketToEmail', $array);
+            $response = Http::post($api_url .'Basket/'.$request->basketId.'/SendBasketToEmail', $array);
             if ($response->getStatusCode() == 200 || $response->getStatusCode() == 201) {
                 return ['status' => true, 'message' => 'Email has been successfully send.'];
             }else {
                 return ['status' => false, 'message' => 'Sorry! Please try after some time'];
             }
-        }else{
-            return ['status' => false, 'message' => 'Sorry! Please try after some time'];
-        }
+
     }
 
     public function checkout(Request $request)

@@ -260,8 +260,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="input_copy">
-                        <input type="text" class="form-control email" placeholder="email here">
-                        <a href="#" class="copyLink_txt"><i class="fa fa-paper-plane-o"></i></a>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="sender_name"> Dit navn:</label>
+                                <input type="text" class="form-control email" id="sender_name" placeholder="Dit navn">
+                            </div>
+                            <div class="col-md-6"><label for="sender_email"> Din e-mail:</label>
+                                <input type="text" class="form-control email" id="sender_email" placeholder="Din e-mail">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label for="receiver_email"> Modtager e-mail:</label>
+                                <input type="text" class="form-control email" id="receiver_email" placeholder="Modtager e-mail">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label for="message"> Evt. besked:</label>
+                                <textarea class="form-control" id="message" placeholder="Evt. besked"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center p-2">
+                                <button class="btn btn-primary copyLink_txt"><i class="fa fa-paper-plane-o"></i> Send</button>
+                            </div>
+                        </div>
                     </div>
                     <span id="validaor"></span>
                 </div>
@@ -307,16 +329,25 @@
             });
 
             $('.copyLink_txt').click(function () {
-                if ($('.email').val() == '') {
-                    $('#validaor').html('Please enter valid e-mail');
-                    $('.email').focus();
-                } else {
+                if ($('#sender_name').val() == '') {
+                    $('#validaor').html('indtast venligst en gyldig Dit navn');
+                    $('#sender_name').focus();
+                }
+                else if ($('#sender_email').val() == '') {
+                    $('#validaor').html('indtast venligst en gyldig Din e-mail');
+                    $('#sender_email').focus();
+                }
+                else if ($('#receiver_email').val() == '') {
+                    $('#validaor').html('indtast venligst en gyldig Modtager e-mail');
+                    $('#receiver_email').focus();
+                }
+                else {
                     generateLink();
                     setTimeout(function() {
                         $.ajax({
                             type: 'get',
                             url: "{{url('/send-cart-link')}}",
-                            data: "_token={{ csrf_token() }}&url=" + $('#copyClipboard').val() + '&email=' + $('.email').val()+'&basketId='+$('#basketId').html(),
+                            data: "_token={{ csrf_token() }}&url=" + $('#copyClipboard').val() + '&sender_name=' + $('#sender_name').val()+'&basketId='+$('#basketId').html()+'&sender_email='+$('#sender_email').val()+'&receiver_email='+$('#receiver_email').val()+'&message='+$('#message').val(),
                             success: function (data) {
                                 if (data.status != undefined) {
                                     $('.email').val('');

@@ -23,8 +23,8 @@ foreach (homePageData() as $sliderContent){
     if ($sliderContent->name == 'video') {
         $vid = $sliderContent->data;
     }
-}
 
+}
 ?>
 
 <section>
@@ -40,13 +40,13 @@ foreach (homePageData() as $sliderContent){
                         if (isset($vid))
                         {
                             ?>
-                            <video src="<?= asset(''.homeVideo($vid)) ?>" loop muted autoplay>
+                            <video src="<?= asset(''.urldecode(homeVideo($vid))) ?>" loop muted autoplay>
                             </video>
                             <?php
                             if ($pop_up_status ==1){
                             ?>
                             <div class="alert alert-custom bg-red alert-dismissible fade show">
-                                <button type="button" class="close" data-dismiss="alert"><img src="<?= asset('')?>/assets/img/close-pop.png"
+                                <button type="button" class="close" data-dismiss="alert"><img src="<?= asset('/assets/img/close-pop.png')?>"
                                                                                               alt=""
                                                                                               class="img-fluid closeicon">
                                 </button>

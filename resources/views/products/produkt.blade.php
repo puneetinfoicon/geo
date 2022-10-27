@@ -273,7 +273,7 @@
                                     }
                                 @endphp
                                 @if($productDetails->hide_amount !=1)
-                                    <h4>@if(  is_array($productDetails->price)) {{str_replace(",",".",number_format($pDetails->basePrice))}}
+                                    <h4>@if(  is_array($productDetails->price)) {{number_format($pDetails->basePrice, 2, ',', '.')}}
                                         kr. ekskl. moms</h4> <div>Ekskl. klargøring, kalibrering og oplæring</div> @else <h4>Ring for en pris </h4>@endif  @else <h4> Ring for en
                                     pris </h4> @endif
                             <!--p> ekskl. moms pr. år</p-->
@@ -509,7 +509,7 @@
                                                                     <p><?= $relate['short_text']?></p>
                                                                     <ul>
                                                                         <li>
-                                                                            <strong> @if($relate->hide_amount !=1) {{ isset($productApiPrices[$relate->api_id]) ? str_replace(",",".",number_format($productApiPrices[$relate->api_id]->basePrice)): "0"}}
+                                                                            <strong> @if($relate->hide_amount !=1) {{ isset($productApiPrices[$relate->api_id]) ? number_format($productApiPrices[$relate->api_id]->basePrice, 2, ',', '.'): "0"}}
                                                                                 kr. ekskl. moms @else Ring for en
                                                                                 pris @endif</strong></li>
                                                                         <li><span class="green"
@@ -573,7 +573,7 @@
 //                                                echo "</pre>";
                                                 ?>
                                                 <li>
-                                                    <strong> @if($passers->hide_amount !=1) {{ isset($parserPrices[$pp]) ?  str_replace(",",".",number_format($parserPrices[$pp]->basePrice)): "0"}}
+                                                    <strong> @if($passers->hide_amount !=1) {{ isset($parserPrices[$pp]) ?  number_format($parserPrices[$pp]->basePrice, 2, ',', '.'): "0"}}
                                                         kr. ekskl. moms @else Ring for en pris @endif</strong></li>
                                                 <li><span class="green"
                                                           style="background-color: <?= isset($parserPrices[$pp]) ? $parserPrices[$pp]->availability->color : "white"?>"></span> <?= isset($parserPrices[$pp]) ? $parserPrices[$pp]->availability->text : ""?>

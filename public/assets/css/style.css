@@ -6870,7 +6870,7 @@ li:empty {
 #minimal-bootstrap-carousel .carousel-caption .container-fluid .box .content {
     width: 55%;
 }
-.accordian-box .content-aa div, .accordian-box .content-aa p{
+.accordian-box .content-aa div.div, .accordian-box .content-aa p{
     color: var(--main);
     font-size: 18px;
     font-family: "Gotham Book";

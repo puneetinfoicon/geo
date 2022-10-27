@@ -173,8 +173,7 @@ $meta = getMetaDetails($page->get('id'));
                                     var color = item.priceApi.availability.color;
                                     var apiText = item.priceApi.availability.text;
                                     let number = item.priceApi.basePrice;
-                                    number = number.toLocaleString();
-                                    var apiPrice = parseFloat(number.replace(/,/gi, ".")) + '  kr. ekskl. moms';
+                                    var apiPrice = number.toLocaleString("da-DK", { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + '  kr. ekskl. moms';
                                     var optCss = "style='background-color:" + color + "'";
                                 } else {
                                     var color = '';

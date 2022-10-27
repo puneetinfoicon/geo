@@ -49,11 +49,9 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="forgot-password">
                                         <a href="{{ url(''). $forgot[1]->data}}">{{$forgot[0]->data}}</a>
                                     </div>
-
                                     <div class="form-group">
                                         <button class="btn btn-submit active-bg">Log ind</button>
                                     </div>
